@@ -63,23 +63,35 @@ const questions = [
         type: 'input',
         name: 'unique',
         message: 'What makes your project stand out?',
-    }
+    },
+    {
+        type: 'input',
+        name: 'licenseLink',
+        message: 'Input your license link',
+    },
+    {
+        type: 'input',
+        name: 'licenseBadge',
+        message: 'Input your license Badge',
+    },
 ];
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
     inquirer.prompt(questions)
     .then((answers) => {
-        const fileContent = generateMarkdown(answers);
+        data = generateMarkdown(answers);
 
-        fs.writeFile('README.md', fileContent, (err) => 
+        fs.writeFile(fileName, data, (err) => 
             err ? console.log(err) : console.log('README.md was successfully created')    
         );
     });
 }
 
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+    writeToFile('README.md')
+}
 
 // Function call to initialize app
 init();
